@@ -202,15 +202,15 @@ export default function Hero() {
                     <div className="w-full min-w-50 min-h-50" style={{ fontFamily: "Borna" }}>
                         <Tabs defaultValue="manually" className="w-full">
                             <TabsList className="w-full">
-                                <TabsTrigger value="palette">
-                                    <Label>Generate Using Color Palette</Label>
-                                </TabsTrigger>
                                 <TabsTrigger value="manually">
                                     <Label>Generate Manually</Label>
                                 </TabsTrigger>
-                                <TabsTrigger value="badge">
-                                    <Label>Generate Badge</Label>
+                                <TabsTrigger value="palette">
+                                    <Label>Generate Using Color Palette</Label>
                                 </TabsTrigger>
+                                {/* <TabsTrigger value="badge">
+                                    <Label>Generate Badge</Label>
+                                </TabsTrigger> */}
                             </TabsList>
 
                             <TabsContent value="palette">
@@ -259,31 +259,31 @@ export default function Hero() {
                                             <AccordionItem value="item-1">
                                                 <AccordionTrigger>Upper Outer Color</AccordionTrigger>
                                                 <AccordionContent>
-                                                    <HexColorPicker color={upperOuterQuadColor} onChange={setUpperOuterQuadColor} />
+                                                    <HexColorPicker className="p-4" color={upperOuterQuadColor} onChange={setUpperOuterQuadColor} />
                                                 </AccordionContent>
                                             </AccordionItem>
                                             <AccordionItem value="item-2">
                                                 <AccordionTrigger>Upper Inner Color</AccordionTrigger>
                                                 <AccordionContent>
-                                                    <HexColorPicker color={upperInnerQuadColor} onChange={setUpperInnerQuadColor} />
+                                                    <HexColorPicker className="p-4" color={upperInnerQuadColor} onChange={setUpperInnerQuadColor} />
                                                 </AccordionContent>
                                             </AccordionItem>
                                             <AccordionItem value="item-3">
                                                 <AccordionTrigger>Lower Outer Color</AccordionTrigger>
                                                 <AccordionContent>
-                                                    <HexColorPicker color={lowerOuterQuadColor} onChange={setLowerOuterQuadColor} />
+                                                    <HexColorPicker className="p-4" color={lowerOuterQuadColor} onChange={setLowerOuterQuadColor} />
                                                 </AccordionContent>
                                             </AccordionItem>
                                             <AccordionItem value="item-4">
                                                 <AccordionTrigger>Lower Inner Color</AccordionTrigger>
                                                 <AccordionContent>
-                                                    <HexColorPicker color={lowerInnerQuadColor} onChange={setLowerInnerQuadColor} />
+                                                    <HexColorPicker className="p-4" color={lowerInnerQuadColor} onChange={setLowerInnerQuadColor} />
                                                 </AccordionContent>
                                             </AccordionItem>
                                             <AccordionItem value="item-5">
                                                 <AccordionTrigger>Backgorund Color</AccordionTrigger>
                                                 <AccordionContent>
-                                                    <HexColorPicker color={backgroundPathColor} onChange={setBackgroundPathColor} />
+                                                    <HexColorPicker className="p-4" color={backgroundPathColor} onChange={setBackgroundPathColor} />
                                                 </AccordionContent>
                                             </AccordionItem>
                                         </Accordion>
@@ -296,7 +296,7 @@ export default function Hero() {
                                 </Card>
                             </TabsContent>
 
-                            <TabsContent value="badge">
+                            {/* <TabsContent value="badge">
                                 <Card>
                                     <CardHeader>
                                         <CardTitle>Generate Badge</CardTitle>
@@ -309,7 +309,7 @@ export default function Hero() {
                                     <CardContent></CardContent>
                                     <CardFooter></CardFooter>
                                 </Card>
-                            </TabsContent>
+                            </TabsContent> */}
                         </Tabs>
                     </div>
                 </div>
