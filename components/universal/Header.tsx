@@ -45,7 +45,7 @@ export default function Header() {
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
-                        <ConnectWallet theme={theme as "light" | "dark" | Theme | undefined} />
+                        <ConnectWallet theme={theme as "light" | "dark" | Theme | undefined} style={{ fontFamily: "Borna" }}/>
                     </div>
                 </div>
             </div>
