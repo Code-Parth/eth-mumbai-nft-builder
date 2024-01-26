@@ -18,7 +18,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="w-full border-b mb-5">
+            <div className="w-full border-b rounded-lg mb-5">
                 <div className="max-w-[90%] w-full px-3 xl:p-0 my-5 mx-auto flex justify-between items-center">
                     <Label className="font-semibold text-3xl" style={{ fontFamily: "Borna" }}>
                         ETH Mumbai NFT Builder
