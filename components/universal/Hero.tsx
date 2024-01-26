@@ -214,6 +214,10 @@ export default function Hero() {
                                             accept="image/*"
                                             onChange={uploadImage}
                                         />
+                                        <div className="flex mt-4 gap-2">
+                                            <Button variant="link" onClick={downloadSvg}>Download SVG</Button>
+                                            <Button variant="link" onClick={downloadPng}>Download PNG</Button>
+                                        </div>
                                     </CardContent>
                                     <CardFooter></CardFooter>
                                 </Card>
