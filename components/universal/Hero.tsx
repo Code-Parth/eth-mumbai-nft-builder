@@ -3,9 +3,12 @@
 import ColorThief from "colorthief"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import { HexColorPicker } from "react-colorful"
 import React, { useState, useRef, ChangeEvent } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+
 
 export default function Hero() {
     const [selectedPath, setSelectedPath] = useState<string | null>(null);
@@ -103,6 +106,17 @@ export default function Hero() {
 
         reader.readAsDataURL(file);
     };
+    const getCurrentDateTimeString = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        return `${year}${month}${day}${hours}${minutes}${seconds}`;
+    };
 
     const downloadSvg = () => {
         const svgData = new XMLSerializer().serializeToString(svgRef.current as Node);
@@ -110,7 +124,10 @@ export default function Hero() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'edited_image.svg';
+
+        const fileName = `ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}.svg`;
+        a.download = fileName;
+
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -129,7 +146,10 @@ export default function Hero() {
             const dataUrl = canvas.toDataURL('image/png');
             const a = document.createElement('a');
             a.href = dataUrl;
-            a.download = 'edited_image.png';
+
+            const fileName = `ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}.png`;
+            a.download = fileName;
+
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -178,8 +198,9 @@ export default function Hero() {
                             />
                         </svg>
                     </div>
+
                     <div className="w-full min-w-50 min-h-50" style={{ fontFamily: "Borna" }}>
-                        <Tabs defaultValue="palette" className="w-full">
+                        <Tabs defaultValue="manually" className="w-full">
                             <TabsList className="w-full">
                                 <TabsTrigger value="palette">
                                     <Label>Generate Using Color Palette</Label>
@@ -233,7 +254,44 @@ export default function Hero() {
                                             Unleash your creativity, make it truly yours!
                                         </CardDescription>
                                     </CardHeader>
-                                    <CardContent></CardContent>
+                                    <CardContent>
+                                        <Accordion type="single" collapsible>
+                                            <AccordionItem value="item-1">
+                                                <AccordionTrigger>Upper Outer Color</AccordionTrigger>
+                                                <AccordionContent>
+                                                    <HexColorPicker color={upperOuterQuadColor} onChange={setUpperOuterQuadColor} />
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                            <AccordionItem value="item-2">
+                                                <AccordionTrigger>Upper Inner Color</AccordionTrigger>
+                                                <AccordionContent>
+                                                    <HexColorPicker color={upperInnerQuadColor} onChange={setUpperInnerQuadColor} />
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                            <AccordionItem value="item-3">
+                                                <AccordionTrigger>Lower Outer Color</AccordionTrigger>
+                                                <AccordionContent>
+                                                    <HexColorPicker color={lowerOuterQuadColor} onChange={setLowerOuterQuadColor} />
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                            <AccordionItem value="item-4">
+                                                <AccordionTrigger>Lower Inner Color</AccordionTrigger>
+                                                <AccordionContent>
+                                                    <HexColorPicker color={lowerInnerQuadColor} onChange={setLowerInnerQuadColor} />
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                            <AccordionItem value="item-5">
+                                                <AccordionTrigger>Backgorund Color</AccordionTrigger>
+                                                <AccordionContent>
+                                                    <HexColorPicker color={backgroundPathColor} onChange={setBackgroundPathColor} />
+                                                </AccordionContent>
+                                            </AccordionItem>
+                                        </Accordion>
+                                        <div className="flex mt-4 gap-2">
+                                            <Button variant="link" onClick={downloadSvg}>Download SVG</Button>
+                                            <Button variant="link" onClick={downloadPng}>Download PNG</Button>
+                                        </div>
+                                    </CardContent>
                                     <CardFooter></CardFooter>
                                 </Card>
                             </TabsContent>
