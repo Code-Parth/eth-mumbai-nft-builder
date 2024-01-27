@@ -8,7 +8,6 @@ import React, { useState, useRef, ChangeEvent } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import { Url } from "next/dist/shared/lib/router/router"
 
 
 export default function Hero() {
@@ -256,43 +255,6 @@ export default function Hero() {
                                 </TabsTrigger>
                             </TabsList>
 
-                            <TabsContent value="palette">
-                                <Card>
-                                    <CardHeader>
-                                        <CardTitle>Generate Using Color Palette</CardTitle>
-                                        <CardDescription>
-                                            Revolutionizing art with Future Collect extracting colors
-                                            from images and infusing them into the ETH logo. Experience
-                                            innovation and style seamlessly merged in every pixel.
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <label htmlFor="file" className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                                            Generate palette from image
-                                        </label>
-                                        <input
-                                            id="file"
-                                            className="hidden file:p-0 file:border-none file:text-white file:bg-black"
-                                            placeholder="Upload"
-                                            type="file"
-                                            accept="image/*"
-                                            onChange={uploadImage}
-                                        />
-                                        <div className="flex mt-4 gap-2">
-                                            <Button variant="link" onClick={downloadSvg}>Download SVG</Button>
-                                            <Button variant="link" onClick={downloadPng}>Download PNG</Button>
-                                        </div>
-                                    </CardContent>
-                                    <CardFooter>
-                                        <Button onClick={generateZoraMintUrlFromPng}>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
-                                            Mint on Zora
-                                        </Button>
-                                    </CardFooter>
-                                </Card>
-                            </TabsContent>
-
                             <TabsContent value="manually">
                                 <Card>
                                     <CardHeader>
@@ -336,6 +298,43 @@ export default function Hero() {
                                                 </AccordionContent>
                                             </AccordionItem>
                                         </Accordion>
+                                        <div className="flex mt-4 gap-2">
+                                            <Button variant="link" onClick={downloadSvg}>Download SVG</Button>
+                                            <Button variant="link" onClick={downloadPng}>Download PNG</Button>
+                                        </div>
+                                    </CardContent>
+                                    <CardFooter>
+                                        <Button onClick={generateZoraMintUrlFromPng}>
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
+                                            Mint on Zora
+                                        </Button>
+                                    </CardFooter>
+                                </Card>
+                            </TabsContent>
+
+                            <TabsContent value="palette">
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>Generate Using Color Palette</CardTitle>
+                                        <CardDescription>
+                                            Revolutionizing art with Future Collect extracting colors
+                                            from images and infusing them into the ETH logo. Experience
+                                            innovation and style seamlessly merged in every pixel.
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <label htmlFor="file" className="cursor-pointer bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                                            Generate Palette From Image
+                                        </label>
+                                        <input
+                                            id="file"
+                                            className="hidden file:p-0 file:border-none file:text-white file:bg-black"
+                                            placeholder="Upload"
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={uploadImage}
+                                        />
                                         <div className="flex mt-4 gap-2">
                                             <Button variant="link" onClick={downloadSvg}>Download SVG</Button>
                                             <Button variant="link" onClick={downloadPng}>Download PNG</Button>
