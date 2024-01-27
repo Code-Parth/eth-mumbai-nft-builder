@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import * as React from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { MoonIcon, SunIcon, GitHubLogoIcon } from "@radix-ui/react-icons"
@@ -12,7 +11,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Label } from "@/components/ui/label"
-import { ConnectWallet, Theme } from "@thirdweb-dev/react"
 
 export default function Header() {
     const { theme, setTheme } = useTheme()
