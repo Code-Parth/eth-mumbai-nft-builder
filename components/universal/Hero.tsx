@@ -8,6 +8,7 @@ import React, { useState, useRef, ChangeEvent } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Url } from "next/dist/shared/lib/router/router"
 
 
 export default function Hero() {
@@ -140,8 +141,8 @@ export default function Hero() {
         const ctx = canvas.getContext('2d');
         const img = new Image();
         img.onload = () => {
-            canvas.width = img.width;
-            canvas.height = img.height;
+            canvas.width = img.width + 362;
+            canvas.height = img.height + 362;
             ctx?.drawImage(img, 0, 0);
             const dataUrl = canvas.toDataURL('image/png');
             const a = document.createElement('a');
@@ -158,30 +159,50 @@ export default function Hero() {
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
     };
 
-    const generateZoraMintUrlFromSvg = () => {
+    const generateZoraMintUrlFromPng = () => {
         const svgData = new XMLSerializer().serializeToString(svgRef.current as Node);
-        const blob = new Blob([svgData], { type: 'image/svg+xml' });
-        const url = URL.createObjectURL(blob);
+        const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/djkldmhe9/image/upload';
+        const uploadPreset = 'ewpyp5pw';
 
-        const externalImageUrl = encodeURIComponent(url);
-        const title = encodeURIComponent(`ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}`);
-        const description = encodeURIComponent('Created with ETH Mumbai NFT Builder CodeParth');
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.onload = () => {
+            canvas.width = img.width + 362;
+            canvas.height = img.height + 362;
+            ctx?.drawImage(img, 0, 0);
+            const dataUrl = canvas.toDataURL('image/png');
 
-        const mintUrl = `https://zora.co/create/single-edition?image=${externalImageUrl}&name=${title}&description=${description}`;
+            const formData = new FormData();
+            formData.append('upload_preset', uploadPreset);
+            formData.append('file', dataUrl);
 
-        console.log(mintUrl);
+            fetch(cloudinaryUploadUrl, {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    let imageUrl = data.url;
+                    if (imageUrl.startsWith('http://')) {
+                        imageUrl = imageUrl.replace('http://', 'https://');
+                    }
 
-        URL.revokeObjectURL(url);
+                    const externalImageUrl = encodeURIComponent(imageUrl);
+                    const title = encodeURIComponent(`ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}`);
+                    const description = encodeURIComponent('Created with ETH Mumbai NFT Builder CodeParth');
 
-        return mintUrl;
+                    const mintUrl = `https://zora.co/create/single-edition?image=${externalImageUrl}&name=${title}&description=${description}`;
+
+                    window.open(mintUrl, '_blank');
+                })
+                .catch(error => {
+                    console.error('Error uploading PNG to Cloudinary:', error);
+                });
+        };
+
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
     };
-
-    const mintOnZora = () => {
-        const zoraMintUrl = generateZoraMintUrlFromSvg();
-
-        window.open(zoraMintUrl, '_blank');
-    };
-
 
     return (
         <>
@@ -263,7 +284,7 @@ export default function Hero() {
                                         </div>
                                     </CardContent>
                                     <CardFooter>
-                                        <Button onClick={mintOnZora}>
+                                        <Button onClick={generateZoraMintUrlFromPng}>
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
                                             Mint on Zora
@@ -321,7 +342,7 @@ export default function Hero() {
                                         </div>
                                     </CardContent>
                                     <CardFooter>
-                                        <Button onClick={mintOnZora}>
+                                        <Button onClick={generateZoraMintUrlFromPng}>
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
                                             Mint on Zora
