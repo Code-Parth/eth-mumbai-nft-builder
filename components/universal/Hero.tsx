@@ -8,6 +8,8 @@ import React, { useState, useRef, ChangeEvent } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import Link from "next/link"
+import { GitHubLogoIcon } from "@radix-ui/react-icons"
 
 
 export default function Hero() {
@@ -206,7 +208,7 @@ export default function Hero() {
     return (
         <>
             <div className="w-full max-w-[90%] min-h-[85vh] items-center mx-auto p-5 border-[1px] rounded-lg mb-5">
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 gap-8 max-sm:grid-cols-1">
                     <div className="w-full min-w-50 min-h-50 p-5 border rounded-lg">
                         <svg
                             ref={svgRef}
@@ -245,8 +247,8 @@ export default function Hero() {
                     </div>
 
                     <div className="w-full min-w-50 min-h-50" style={{ fontFamily: "Borna" }}>
-                        <Tabs defaultValue="manually" className="w-full">
-                            <TabsList className="w-full">
+                        <Tabs defaultValue="manually" className="w-full ">
+                            <TabsList className="w-full max-sm:h-20 flex max-sm:flex-col max-sm:gap-2">
                                 <TabsTrigger value="manually">
                                     <Label>Generate Manually</Label>
                                 </TabsTrigger>
@@ -352,6 +354,16 @@ export default function Hero() {
                         </Tabs>
                     </div>
                 </div>
+                <div className="flex justify-center mt-4">
+                        <Button variant="secondary">
+                            <Link href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}>
+                                <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
+                                    <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
+                                    GitHub Repository
+                                </Label>
+                            </Link>
+                        </Button>
+                    </div>
             </div>
         </>
     );
