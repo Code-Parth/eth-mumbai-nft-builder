@@ -1,8 +1,6 @@
 "use client"
 
-import Link from "next/link"
 import ColorThief from "colorthief"
-import zorb from "@/public/zorb.webp"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { HexColorPicker } from "react-colorful"
@@ -181,10 +179,7 @@ export default function Hero() {
     const mintOnZora = () => {
         const zoraMintUrl = generateZoraMintUrlFromSvg();
 
-        // You can open the Zora minting page in a new tab/window or redirect the user
         window.open(zoraMintUrl, '_blank');
-        // Or you can use the generated URL for further actions
-        // console.log('Zora Minting URL:', zoraMintUrl);
     };
 
 
@@ -238,9 +233,6 @@ export default function Hero() {
                                 <TabsTrigger value="palette">
                                     <Label>Generate Using Color Palette</Label>
                                 </TabsTrigger>
-                                {/* <TabsTrigger value="badge">
-                                    <Label>Generate Badge</Label>
-                                </TabsTrigger> */}
                             </TabsList>
 
                             <TabsContent value="palette">
@@ -337,21 +329,6 @@ export default function Hero() {
                                     </CardFooter>
                                 </Card>
                             </TabsContent>
-
-                            {/* <TabsContent value="badge">
-                                <Card>
-                                    <CardHeader>
-                                        <CardTitle>Generate Badge</CardTitle>
-                                        <CardDescription>
-                                            Create your personalized badge! Upload your photo, design
-                                            your unique emblem, and proudly showcase it on your socials.
-                                            Express yourself with flair and style. Let your badge tell your story!
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent></CardContent>
-                                    <CardFooter></CardFooter>
-                                </Card>
-                            </TabsContent> */}
                         </Tabs>
                     </div>
                 </div>
