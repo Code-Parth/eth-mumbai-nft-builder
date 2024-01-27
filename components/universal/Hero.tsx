@@ -1,18 +1,21 @@
 "use client"
 
+import Link from "next/link"
 import ColorThief from "colorthief"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { HexColorPicker } from "react-colorful"
-import React, { useState, useRef, ChangeEvent } from "react"
+import { useToast } from "@/components/ui/use-toast"
+import { GitHubLogoIcon } from "@radix-ui/react-icons"
+import React, { useState, useEffect, useRef, ChangeEvent } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import Link from "next/link"
-import { GitHubLogoIcon } from "@radix-ui/react-icons"
 
 
 export default function Hero() {
+    const { toast } = useToast()
+    const [currentDate, setCurrentDate] = useState<Date | null>(null);
     const [selectedPath, setSelectedPath] = useState<string | null>(null);
     const [currentColor, setCurrentColor] = useState<string>('#000000');
     const [backgroundPathColor, setBackgroundPathColor] = useState<string>('#F89D21');
@@ -26,6 +29,22 @@ export default function Hero() {
     const [otherPathsPickerColor, setOtherPathsPickerColor] = useState<string>('#000000');
 
     const svgRef = useRef<SVGSVGElement | null>(null);
+
+    useEffect(() => {
+        const getCurrentDate = (): void => {
+            const date = new Date();
+            setCurrentDate(date);
+        };
+
+        getCurrentDate();
+    }, []);
+
+    const isBeforeDeadline = () => {
+        // Set the deadline to January 30th, 12 PM IST
+        const deadlineDate = new Date('2024-01-30T06:30:00'); // Assuming server time is UTC
+
+        return currentDate && currentDate < deadlineDate;
+    };
 
     const handleBackgroundPathColorChange = (color: string) => {
         setBackgroundPathPickerColor(color);
@@ -354,16 +373,38 @@ export default function Hero() {
                         </Tabs>
                     </div>
                 </div>
+
                 <div className="flex justify-center mt-4">
-                        <Button variant="secondary">
-                            <Link href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}>
-                                <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
-                                    <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
-                                    GitHub Repository
-                                </Label>
-                            </Link>
-                        </Button>
-                    </div>
+                    {currentDate && (
+                        <div>
+                            {isBeforeDeadline() ? (
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => {
+                                        toast({
+                                            title: 'Stay tuned!',
+                                            description: 'GitHub Repository will be available after the Challenge ends.',
+                                        });
+                                    }}
+                                >
+                                    <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
+                                        <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
+                                        GitHub Repository
+                                    </Label>
+                                </Button>
+                            ) : (
+                                <Button variant="secondary">
+                                    <Link href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}>
+                                        <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
+                                            <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
+                                            GitHub Repository
+                                        </Label>
+                                    </Link>
+                                </Button>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
         </>
     );
