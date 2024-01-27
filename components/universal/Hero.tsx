@@ -283,25 +283,25 @@ export default function Hero() {
                                         <CardDescription>
                                             Introducing a revolutionary feature! Customize your NFT.
                                             Choose and modify specific colors to match your style.
-                                            Unleash your creativity, make it truly yours!
+                                            Unleash your creativity, make it truly yours! आई शपथ 😄!
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
                                         <Accordion type="single" collapsible>
                                             <AccordionItem value="item-1">
-                                                <AccordionTrigger>Upper Outer Color</AccordionTrigger>
+                                                <AccordionTrigger>Upper Border Color</AccordionTrigger>
                                                 <AccordionContent>
                                                     <HexColorPicker className="p-4" color={upperOuterQuadColor} onChange={setUpperOuterQuadColor} />
                                                 </AccordionContent>
                                             </AccordionItem>
                                             <AccordionItem value="item-2">
-                                                <AccordionTrigger>Upper Inner Color</AccordionTrigger>
+                                                <AccordionTrigger>Lower Border Color</AccordionTrigger>
                                                 <AccordionContent>
                                                     <HexColorPicker className="p-4" color={upperInnerQuadColor} onChange={setUpperInnerQuadColor} />
                                                 </AccordionContent>
                                             </AccordionItem>
                                             <AccordionItem value="item-3">
-                                                <AccordionTrigger>Lower Outer Color</AccordionTrigger>
+                                                <AccordionTrigger>Upper Inner Color</AccordionTrigger>
                                                 <AccordionContent>
                                                     <HexColorPicker className="p-4" color={lowerOuterQuadColor} onChange={setLowerOuterQuadColor} />
                                                 </AccordionContent>
@@ -339,9 +339,7 @@ export default function Hero() {
                                     <CardHeader>
                                         <CardTitle>Generate Using Color Palette</CardTitle>
                                         <CardDescription>
-                                            Revolutionizing art with Future Collect extracting colors
-                                            from images and infusing them into the ETH logo. Experience
-                                            innovation and style seamlessly merged in every pixel.
+                                        Imagine if you could use the cool colors from the ETH logo to paint anything you want! Future Collect makes it happen!...it&apos;s like they were always meant to be together! Logo ke rang badlo, Logon🫂 ke nahi ...
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
@@ -382,8 +380,8 @@ export default function Hero() {
                                     variant="secondary"
                                     onClick={() => {
                                         toast({
-                                            title: 'Stay tuned!',
-                                            description: 'GitHub Repository will be available after the Challenge ends.',
+                                            title: 'लवकरच !',
+                                            description: 'GitHub Repository will be publicly available after the Challenge ends.',
                                         });
                                     }}
                                 >
