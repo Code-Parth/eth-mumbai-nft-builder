@@ -227,7 +227,7 @@ export default function Hero() {
     return (
         <>
             <div className="w-full max-w-[90%] min-h-[85vh] items-center mx-auto p-5 border-[1px] rounded-lg mb-5">
-                <div className="grid grid-cols-2 gap-8 max-sm:grid-cols-1">
+                <div className="grid grid-cols-2 gap-8 max-lg:grid-cols-1">
                     <div className="w-full min-w-50 min-h-50 p-5 border rounded-lg">
                         <svg
                             ref={svgRef}
