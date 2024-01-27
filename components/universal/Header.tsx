@@ -2,18 +2,33 @@
 
 import Link from "next/link"
 import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
-import { MoonIcon, SunIcon, GitHubLogoIcon } from "@radix-ui/react-icons"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import React, { useState, useEffect } from "react"
+import { useToast } from "@/components/ui/use-toast"
+import { MoonIcon, SunIcon, GitHubLogoIcon } from "@radix-ui/react-icons"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export default function Header() {
+    const { toast } = useToast()
     const { setTheme } = useTheme()
+    const [currentDate, setCurrentDate] = useState<Date | null>(null);
+
+    useEffect(() => {
+        const getCurrentDate = (): void => {
+            const date = new Date();
+            setCurrentDate(date);
+        };
+
+        getCurrentDate();
+    }, []);
+
+    const isBeforeDeadline = () => {
+        // Set the deadline to January 30th, 12 PM IST
+        const deadlineDate = new Date('2024-01-30T06:30:00'); // Assuming server time is UTC
+
+        return currentDate && currentDate < deadlineDate;
+    };
 
     return (
         <>
@@ -44,19 +59,42 @@ export default function Header() {
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
-                        <Button variant="secondary">
-                            <Link
-                                href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}
-                            >
-                                <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: "Borna" }}>
-                                    <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
-                                    GitHub Repository
-                                </Label>
-                            </Link>
-                        </Button>
+
+                        <div>
+                            {currentDate && (
+                                <div>
+                                    {isBeforeDeadline() ? (
+                                        <Button
+                                            variant="secondary"
+                                            onClick={() => {
+                                                toast({
+                                                    title: 'Stay tuned!',
+                                                    description: 'GitHub Repository will be available after the Challenge ends.',
+                                                });
+                                            }}
+                                        >
+                                            <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
+                                                <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
+                                                GitHub Repository
+                                            </Label>
+                                        </Button>
+                                    ) : (
+                                        <Button variant="secondary">
+                                            <Link href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}>
+                                                <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
+                                                    <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
+                                                    GitHub Repository
+                                                </Label>
+                                            </Link>
+                                        </Button>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
