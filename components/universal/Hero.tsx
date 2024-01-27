@@ -339,7 +339,9 @@ export default function Hero() {
                                     <CardHeader>
                                         <CardTitle>Generate Using Color Palette</CardTitle>
                                         <CardDescription>
-                                        Imagine if you could use the cool colors from the ETH logo to paint anything you want! Future Collect makes it happen!...it&apos;s like they were always meant to be together! Logo ke rang badlo, Logon🫂 ke nahi ...
+                                        Imagine if you could use the cool colors from the ETH logo 
+                                        to paint anything you want! Future Collect makes it happen!...it&apos;s 
+                                        like they were always meant to be together! Logo ke rang badlo, Logon🤗 ke nahi ...
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
