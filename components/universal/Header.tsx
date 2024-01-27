@@ -7,14 +7,13 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export default function Header() {
-    const { setTheme, theme } = useTheme()
-    const imageSrc = theme === 'light' ? '/ethmumbai_light.svg' : '/ethmumbai_dark.svg';
+    const { setTheme } = useTheme()
 
     return (
         <>
             <div className="w-full border-b rounded-lg mb-5">
                 <div className="max-w-[90%] w-full px-3 xl:p-0 my-5 mx-auto flex justify-between items-center">
-                    <Image src={imageSrc} alt="ETH Mumbai" width={150} height={150} className="max-sm:w-[75px]" />
+                    <Image src="/ethmumbai.webp" alt="ETH Mumbai" width={150} height={150} className="max-sm:w-[75px]" />
                     <div className="flex items-center gap-5">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -30,6 +29,9 @@ export default function Header() {
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setTheme("dark")} style={{ fontFamily: "Borna" }}>
                                     Dark
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setTheme("system")} style={{ fontFamily: "Borna" }}>
+                                    System
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
