@@ -8,6 +8,7 @@ import React, { useState, useEffect } from "react"
 import { useToast } from "@/components/ui/use-toast"
 import { MoonIcon, SunIcon, GitHubLogoIcon } from "@radix-ui/react-icons"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import Image from "next/image"
 
 export default function Header() {
     const { toast } = useToast()
@@ -34,9 +35,10 @@ export default function Header() {
         <>
             <div className="w-full border-b rounded-lg mb-5">
                 <div className="max-w-[90%] w-full px-3 xl:p-0 my-5 mx-auto flex justify-between items-center">
-                    <Label className="font-semibold text-3xl" style={{ fontFamily: "Borna" }}>
-                        ETH Mumbai NFT Builder
-                    </Label>
+                    {/* <Label className="font-semibold text-3xl" style={{ fontFamily: "Borna" }}>
+                        ETH Mumbai
+                    </Label> */}
+                    <Image src="/ethmumbai.svg" alt="ETH Mumbai" width={150} height={150} className="max-sm:w-[75px]" />
 
                     <div className="flex items-center gap-5">
                         <DropdownMenu>
@@ -60,37 +62,7 @@ export default function Header() {
                             </DropdownMenuContent>
                         </DropdownMenu>
 
-                        <div>
-                            {currentDate && (
-                                <div>
-                                    {isBeforeDeadline() ? (
-                                        <Button
-                                            variant="secondary"
-                                            onClick={() => {
-                                                toast({
-                                                    title: 'Stay tuned!',
-                                                    description: 'GitHub Repository will be available after the Challenge ends.',
-                                                });
-                                            }}
-                                        >
-                                            <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
-                                                <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
-                                                GitHub Repository
-                                            </Label>
-                                        </Button>
-                                    ) : (
-                                        <Button variant="secondary">
-                                            <Link href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}>
-                                                <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
-                                                    <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
-                                                    GitHub Repository
-                                                </Label>
-                                            </Link>
-                                        </Button>
-                                    )}
-                                </div>
-                            )}
-                        </div>
+                        
 
                     </div>
                 </div>
