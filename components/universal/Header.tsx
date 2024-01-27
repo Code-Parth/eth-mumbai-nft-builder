@@ -13,7 +13,7 @@ import {
 import { Label } from "@/components/ui/label"
 
 export default function Header() {
-    const { theme, setTheme } = useTheme()
+    const { setTheme } = useTheme()
 
     return (
         <>
