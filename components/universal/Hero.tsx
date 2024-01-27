@@ -1,6 +1,8 @@
 "use client"
 
+import Link from "next/link"
 import ColorThief from "colorthief"
+import zorb from "@/public/zorb.webp"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { HexColorPicker } from "react-colorful"
@@ -158,6 +160,34 @@ export default function Hero() {
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
     };
 
+    const generateZoraMintUrlFromSvg = () => {
+        const svgData = new XMLSerializer().serializeToString(svgRef.current as Node);
+        const blob = new Blob([svgData], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+
+        const externalImageUrl = encodeURIComponent(url);
+        const title = encodeURIComponent(`ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}`);
+        const description = encodeURIComponent('Created with ETH Mumbai NFT Builder CodeParth');
+
+        const mintUrl = `https://zora.co/create/single-edition?image=${externalImageUrl}&name=${title}&description=${description}`;
+
+        console.log(mintUrl);
+
+        URL.revokeObjectURL(url);
+
+        return mintUrl;
+    };
+
+    const mintOnZora = () => {
+        const zoraMintUrl = generateZoraMintUrlFromSvg();
+
+        // You can open the Zora minting page in a new tab/window or redirect the user
+        window.open(zoraMintUrl, '_blank');
+        // Or you can use the generated URL for further actions
+        // console.log('Zora Minting URL:', zoraMintUrl);
+    };
+
+
     return (
         <>
             <div className="w-full max-w-[90%] min-h-[85vh] items-center mx-auto p-5 border-[1px] rounded-lg mb-5">
@@ -240,7 +270,13 @@ export default function Hero() {
                                             <Button variant="link" onClick={downloadPng}>Download PNG</Button>
                                         </div>
                                     </CardContent>
-                                    <CardFooter></CardFooter>
+                                    <CardFooter>
+                                        <Button onClick={mintOnZora}>
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
+                                            Mint on Zora
+                                        </Button>
+                                    </CardFooter>
                                 </Card>
                             </TabsContent>
 
@@ -292,7 +328,13 @@ export default function Hero() {
                                             <Button variant="link" onClick={downloadPng}>Download PNG</Button>
                                         </div>
                                     </CardContent>
-                                    <CardFooter></CardFooter>
+                                    <CardFooter>
+                                        <Button onClick={mintOnZora}>
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
+                                            Mint on Zora
+                                        </Button>
+                                    </CardFooter>
                                 </Card>
                             </TabsContent>
 

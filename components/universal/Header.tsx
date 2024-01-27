@@ -1,9 +1,10 @@
 "use client"
 
+import Link from "next/link"
 import * as React from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
+import { MoonIcon, SunIcon, GitHubLogoIcon } from "@radix-ui/react-icons"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -45,7 +46,16 @@ export default function Header() {
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
-                        <ConnectWallet theme={theme as "light" | "dark" | Theme | undefined} style={{ fontFamily: "Borna" }}/>
+                        <Button variant="secondary">
+                            <Link
+                                href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}
+                            >
+                                <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: "Borna" }}>
+                                    <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
+                                    GitHub Repository
+                                </Label>
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,6 @@
 "use client"
 
 import "./globals.css";
-import { Sepolia } from "@thirdweb-dev/chains";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export default function RootLayout({
@@ -22,12 +20,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <ThirdwebProvider
-                        activeChain={Sepolia}
-                        clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
-                    >
-                        {children}
-                    </ThirdwebProvider>
+                    {children}
                 </ThemeProvider>
             </body>
         </html>
