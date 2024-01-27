@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from "@/components/theme-provider";
 
 export default function RootLayout({
@@ -21,6 +22,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     {children}
+                    <Analytics />
                     <Toaster />
                 </ThemeProvider>
             </body>
