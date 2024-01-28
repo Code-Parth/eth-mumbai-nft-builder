@@ -14,153 +14,265 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, 
 
 
 export default function Hero() {
+    // Using the useToast hook to get the toast object for showing notifications
     const { toast } = useToast()
+
+    // State variable for storing the current date, initially set to null
     const [currentDate, setCurrentDate] = useState<Date | null>(null);
+
+    // State variable for storing the current color, initially set to '#000000'
     const [currentColor, setCurrentColor] = useState<string>('#000000');
+
+    // State variable for storing the background path color, initially set to '#F89D21'
     const [backgroundPathColor, setBackgroundPathColor] = useState<string>('#F89D21');
+
+    // State variable for storing the upper outer quadrant color, initially set to '#FFFFFF'
     const [upperOuterQuadColor, setUpperOuterQuadColor] = useState<string>('#FFFFFF');
+
+    // State variable for storing the upper inner quadrant color, initially set to '#000000'
     const [upperInnerQuadColor, setUpperInnerQuadColor] = useState<string>('#000000');
+
+    // State variable for storing the lower outer quadrant color, initially set to '#000000'
     const [lowerOuterQuadColor, setLowerOuterQuadColor] = useState<string>('#000000');
+
+    // State variable for storing the lower inner quadrant color, initially set to '#FFFFFF'
     const [lowerInnerQuadColor, setLowerInnerQuadColor] = useState<string>('#FFFFFF');
+
+    // State variable for storing the uploaded image, initially set to null
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
+    // Reference to the SVG element in the DOM
     const svgRef = useRef<SVGSVGElement | null>(null);
 
+    // useEffect is a hook in React that is equivalent to componentDidMount and componentDidUpdate in class components
     useEffect(() => {
+        // Define a function to get the current date
         const getCurrentDate = (): void => {
+            // Create a new Date object
             const date = new Date();
+            // Set the state variable currentDate to the newly created Date object
             setCurrentDate(date);
         };
 
+        // Call the function to get the current date
         getCurrentDate();
-    }, []);
+    }, []); // The empty array [] means this useEffect will run once after the component is mounted
 
+    // Define a function to check if the current date is before the deadline
     const isBeforeDeadline = () => {
-        // Set the deadline to January 30th, 12 PM IST
-        const deadlineDate = new Date('2024-01-30T06:30:00'); // Assuming server time is UTC
+        // Set the deadline to January 30th, 2024, 12 PM IST
+        // The time is set in UTC, so 12 PM IST is equivalent to 6:30 AM UTC
+        const deadlineDate = new Date('2024-01-30T06:30:00');
 
+        // Return true if the current date is set and is before the deadline date
+        // Return false otherwise
         return currentDate && currentDate < deadlineDate;
     };
 
+    // Define a function to handle image upload
     const uploadImage = (e: ChangeEvent<HTMLInputElement>) => {
+        // Get the first file from the input event
         const file = e.target.files?.[0];
+        // If no file was selected, return immediately
         if (!file) return;
 
+        // Create a new FileReader object
         const reader = new FileReader();
 
+        // Define what happens when the file reader successfully reads a file
         reader.onload = async (event) => {
+            // Create a new Image object
             const img = new Image();
+            // Define what happens when the image successfully loads
             img.onload = () => {
+                // Create a new ColorThief object
                 const colorThief = new ColorThief();
+                // Get a color palette from the image using ColorThief
                 const colorPalette = colorThief.getPalette(img, 6);
+                // Set the state variables to the colors from the color palette
                 setUpperOuterQuadColor(`rgb(${colorPalette[0].join(', ')})`);
                 setUpperInnerQuadColor(`rgb(${colorPalette[1].join(', ')})`);
                 setLowerOuterQuadColor(`rgb(${colorPalette[2].join(', ')})`);
                 setLowerInnerQuadColor(`rgb(${colorPalette[3].join(', ')})`);
                 setBackgroundPathColor(`rgb(${colorPalette[4].join(', ')})`);
                 setCurrentColor(`rgb(${colorPalette[5].join(', ')})`);
+                // Set the state variable for the uploaded image to the result of the file reader
                 setUploadedImage(event.target?.result as string);
             };
 
+            // Set the source of the image to the result of the file reader
             img.src = event.target?.result as string;
         };
 
+        // Start reading the file as a data URL
         reader.readAsDataURL(file);
     };
+
+    // Define a function to get the current date and time as a string
     const getCurrentDateTimeString = () => {
+        // Create a new Date object for the current date and time
         const now = new Date();
+
+        // Get the current year as a four-digit number
         const year = now.getFullYear();
+
+        // Get the current month as a two-digit number (add 1 because JavaScript months are 0-based)
+        // padStart is used to add a leading zero if the month is a single digit
         const month = String(now.getMonth() + 1).padStart(2, '0');
+
+        // Get the current day of the month as a two-digit number
+        // padStart is used to add a leading zero if the day is a single digit
         const day = String(now.getDate()).padStart(2, '0');
+
+        // Get the current hour as a two-digit number
+        // padStart is used to add a leading zero if the hour is a single digit
         const hours = String(now.getHours()).padStart(2, '0');
+
+        // Get the current minute as a two-digit number
+        // padStart is used to add a leading zero if the minute is a single digit
         const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        // Get the current second as a two-digit number
+        // padStart is used to add a leading zero if the second is a single digit
         const seconds = String(now.getSeconds()).padStart(2, '0');
 
+        // Return the current date and time as a string in the format YYYYMMDDHHMMSS
         return `${year}${month}${day}${hours}${minutes}${seconds}`;
     };
 
+    // Define a function to download the SVG
     const downloadSvg = () => {
+        // Serialize the SVG to a string using XMLSerializer
         const svgData = new XMLSerializer().serializeToString(svgRef.current as Node);
+        // Create a new Blob object from the SVG data, with the type 'image/svg+xml'
         const blob = new Blob([svgData], { type: 'image/svg+xml' });
+        // Create a URL for the Blob object
         const url = URL.createObjectURL(blob);
+        // Create a new 'a' (anchor) element
         const a = document.createElement('a');
+        // Set the href of the 'a' element to the Blob URL
         a.href = url;
 
+        // Create a file name using the current date and time
         const fileName = `ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}.svg`;
+        // Set the download attribute of the 'a' element to the file name
         a.download = fileName;
 
+        // Append the 'a' element to the body of the document
         document.body.appendChild(a);
+        // Simulate a click on the 'a' element to start the download
         a.click();
+        // Remove the 'a' element from the body of the document
         document.body.removeChild(a);
+        // Revoke the Blob URL
         URL.revokeObjectURL(url);
     };
 
+    // Define a function to download the SVG as a PNG
     const downloadPng = () => {
+        // Serialize the SVG to a string using XMLSerializer
         const svgData = new XMLSerializer().serializeToString(svgRef.current as Node);
+        // Create a new canvas element
         const canvas = document.createElement('canvas');
+        // Get the 2D rendering context for the canvas
         const ctx = canvas.getContext('2d');
+        // Create a new Image object
         const img = new Image();
+        // Define what happens when the image successfully loads
         img.onload = () => {
+            // Set the width and height of the canvas to the width and height of the image plus 362
             canvas.width = img.width + 362;
             canvas.height = img.height + 362;
+            // Draw the image onto the canvas at the top-left corner
             ctx?.drawImage(img, 0, 0);
+            // Convert the canvas to a data URL in PNG format
             const dataUrl = canvas.toDataURL('image/png');
+            // Create a new 'a' (anchor) element
             const a = document.createElement('a');
+            // Set the href of the 'a' element to the data URL
             a.href = dataUrl;
 
+            // Create a file name using the current date and time
             const fileName = `ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}.png`;
+            // Set the download attribute of the 'a' element to the file name
             a.download = fileName;
 
+            // Append the 'a' element to the body of the document
             document.body.appendChild(a);
+            // Simulate a click on the 'a' element to start the download
             a.click();
+            // Remove the 'a' element from the body of the document
             document.body.removeChild(a);
         };
 
+        // Set the source of the image to the serialized SVG data, encoded as a data URL
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
     };
 
+    // Define a function to generate a Zora mint URL from a PNG
     const generateZoraMintUrlFromPng = () => {
+        // Serialize the SVG to a string using XMLSerializer
         const svgData = new XMLSerializer().serializeToString(svgRef.current as Node);
+        // Define the URL for uploading to Cloudinary
         const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/djkldmhe9/image/upload';
-        const uploadPreset = 'ewpyp5pw';
+        // Get the Cloudinary upload preset from the environment variables
+        const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET ?? '';
 
+        // Create a new canvas element
         const canvas = document.createElement('canvas');
+        // Get the 2D rendering context for the canvas
         const ctx = canvas.getContext('2d');
+        // Create a new Image object
         const img = new Image();
+        // Define what happens when the image successfully loads
         img.onload = () => {
+            // Set the width and height of the canvas to the width and height of the image plus 362
             canvas.width = img.width + 362;
             canvas.height = img.height + 362;
+            // Draw the image onto the canvas at the top-left corner
             ctx?.drawImage(img, 0, 0);
+            // Convert the canvas to a data URL in PNG format
             const dataUrl = canvas.toDataURL('image/png');
 
+            // Create a new FormData object
             const formData = new FormData();
+            // Append the upload preset to the FormData object
             formData.append('upload_preset', uploadPreset);
+            // Append the data URL to the FormData object
             formData.append('file', dataUrl);
 
+            // Send a POST request to the Cloudinary upload URL with the FormData object as the body
             fetch(cloudinaryUploadUrl, {
                 method: 'POST',
                 body: formData,
             })
                 .then(response => response.json())
                 .then(data => {
+                    // Get the URL of the uploaded image from the response data
                     let imageUrl = data.url;
+                    // If the image URL starts with 'http://', replace it with 'https://'
                     if (imageUrl.startsWith('http://')) {
                         imageUrl = imageUrl.replace('http://', 'https://');
                     }
 
+                    // Encode the image URL, title, and description for use in a URL
                     const externalImageUrl = encodeURIComponent(imageUrl);
                     const title = encodeURIComponent(`ETH_Mumbai_CodeParth_${getCurrentDateTimeString()}`);
                     const description = encodeURIComponent('Created with ETH Mumbai NFT Builder CodeParth');
 
+                    // Create the Zora mint URL
                     const mintUrl = `https://zora.co/create/single-edition?image=${externalImageUrl}&name=${title}&description=${description}`;
 
+                    // Open the Zora mint URL in a new tab
                     window.open(mintUrl, '_blank');
                 })
                 .catch(error => {
+                    // Log any errors that occur during the upload
                     console.error('Error uploading PNG to Cloudinary:', error);
                 });
         };
 
+        // Set the source of the image to the serialized SVG data, encoded as a data URL
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
     };
 
@@ -171,29 +283,29 @@ export default function Hero() {
                     <div className="w-full min-w-50 min-h-50 p-5 border rounded-lg">
                         <svg
                             ref={svgRef}
-                            className='cursor-pointer pointer-events-none rounded-md aspect-auto w-full'
+                            className='pointer-events-none rounded-md aspect-auto w-full'
                             viewBox="0 0 2400 2400"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            {/* Background */}
+                            {/* // A rectangle that covers the entire SVG, filled with the color specified by backgroundPathColor */}
                             <rect width="2400" height="2400" fill={backgroundPathColor} />
-                            {/* Upper Outer Quad */}
+                            {/* // A path (a shape) defined by a series of coordinates, filled with the color specified by upperOuterQuadColor */}
                             <path
                                 d="M1185.6 294.398L1758 1216L1196.4 1548.4L642 1210L1185.6 294.398Z"
                                 fill={upperOuterQuadColor}
                             />
-                            {/* Upper Inner Quad */}
+                            {/* // Another path, filled with the color specified by upperInnerQuadColor */}
                             <path
                                 d="M1196.41 2105.2L1755.61 1319.2L1198.81 1649.2L645.609 1327.6L1196.41 2105.2Z"
                                 fill={upperInnerQuadColor}
                             />
-                            {/* Lower Outer Quad */}
+                            {/* // Another path, filled with the color specified by lowerOuterQuadColor */}
                             <path
                                 d="M1186.79 456.398L1607.99 1166.8L1191.59 1428.4L788.391 1166.8L1186.79 456.398Z"
                                 fill={lowerOuterQuadColor}
                             />
-                            {/* Lower Inner Quad */}
+                            {/* // Another path, filled with the color specified by lowerInnerQuadColor */}
                             <path
                                 d="M1198.8 1992.4L1486.8 1572.4L1205.75 1750L928.805 1603.6L1198.8 1992.4Z"
                                 fill={lowerInnerQuadColor}
