@@ -16,7 +16,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, 
 export default function Hero() {
     const { toast } = useToast()
     const [currentDate, setCurrentDate] = useState<Date | null>(null);
-    const [selectedPath, setSelectedPath] = useState<string | null>(null);
     const [currentColor, setCurrentColor] = useState<string>('#000000');
     const [backgroundPathColor, setBackgroundPathColor] = useState<string>('#F89D21');
     const [upperOuterQuadColor, setUpperOuterQuadColor] = useState<string>('#FFFFFF');
@@ -24,9 +23,6 @@ export default function Hero() {
     const [lowerOuterQuadColor, setLowerOuterQuadColor] = useState<string>('#000000');
     const [lowerInnerQuadColor, setLowerInnerQuadColor] = useState<string>('#FFFFFF');
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-
-    const [backgroundPathPickerColor, setBackgroundPathPickerColor] = useState<string>('#F89D21');
-    const [otherPathsPickerColor, setOtherPathsPickerColor] = useState<string>('#000000');
 
     const svgRef = useRef<SVGSVGElement | null>(null);
 
@@ -44,62 +40,6 @@ export default function Hero() {
         const deadlineDate = new Date('2024-01-30T06:30:00'); // Assuming server time is UTC
 
         return currentDate && currentDate < deadlineDate;
-    };
-
-    const handleBackgroundPathColorChange = (color: string) => {
-        setBackgroundPathPickerColor(color);
-        setBackgroundPathColor(color);
-    };
-
-    const handleOtherPathsColorChange = (color: string) => {
-        setOtherPathsPickerColor(color);
-        if (selectedPath) {
-            setCurrentColor(color);
-            updateColor(selectedPath, color);
-        }
-    };
-
-    const handleColorChange = (color: string) => {
-        if (selectedPath) {
-            setCurrentColor(color);
-            updateColor(selectedPath, color);
-        } else {
-            setCurrentColor(color);
-            setBackgroundPathColor(color);
-        }
-    };
-
-    const handlePathSelect = (path: string) => {
-        setSelectedPath(path);
-        setCurrentColor(
-            path === 'backgroundPathColor' ? backgroundPathColor :
-                path === 'upperOuterQuad' ? upperOuterQuadColor :
-                    path === 'upperInnerQuad' ? upperInnerQuadColor :
-                        path === 'lowerOuterQuad' ? lowerOuterQuadColor :
-                            path === 'lowerInnerQuad' ? lowerInnerQuadColor : '#000000'
-        );
-    };
-
-    const updateColor = (path: string, color: string) => {
-        switch (path) {
-            case 'backgroundPathColor':
-                setBackgroundPathColor(color);
-                break;
-            case 'upperOuterQuad':
-                setUpperOuterQuadColor(color);
-                break;
-            case 'upperInnerQuad':
-                setUpperInnerQuadColor(color);
-                break;
-            case 'lowerOuterQuad':
-                setLowerOuterQuadColor(color);
-                break;
-            case 'lowerInnerQuad':
-                setLowerInnerQuadColor(color);
-                break;
-            default:
-                break;
-        }
     };
 
     const uploadImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -231,7 +171,7 @@ export default function Hero() {
                     <div className="w-full min-w-50 min-h-50 p-5 border rounded-lg">
                         <svg
                             ref={svgRef}
-                            className='cursor-pointer rounded-md aspect-auto w-full'
+                            className='cursor-pointer pointer-events-none rounded-md aspect-auto w-full'
                             viewBox="0 0 2400 2400"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -241,26 +181,22 @@ export default function Hero() {
                             {/* Upper Outer Quad */}
                             <path
                                 d="M1185.6 294.398L1758 1216L1196.4 1548.4L642 1210L1185.6 294.398Z"
-                                fill={selectedPath === 'upperOuterQuad' ? currentColor : upperOuterQuadColor}
-                                onClick={() => handlePathSelect('upperOuterQuad')}
+                                fill={upperOuterQuadColor}
                             />
                             {/* Upper Inner Quad */}
                             <path
                                 d="M1196.41 2105.2L1755.61 1319.2L1198.81 1649.2L645.609 1327.6L1196.41 2105.2Z"
-                                fill={selectedPath === 'upperInnerQuad' ? currentColor : upperInnerQuadColor}
-                                onClick={() => handlePathSelect('upperInnerQuad')}
+                                fill={upperInnerQuadColor}
                             />
                             {/* Lower Outer Quad */}
                             <path
                                 d="M1186.79 456.398L1607.99 1166.8L1191.59 1428.4L788.391 1166.8L1186.79 456.398Z"
-                                fill={selectedPath === 'lowerOuterQuad' ? currentColor : lowerOuterQuadColor}
-                                onClick={() => handlePathSelect('lowerOuterQuad')}
+                                fill={lowerOuterQuadColor}
                             />
                             {/* Lower Inner Quad */}
                             <path
                                 d="M1198.8 1992.4L1486.8 1572.4L1205.75 1750L928.805 1603.6L1198.8 1992.4Z"
-                                fill={selectedPath === 'lowerInnerQuad' ? currentColor : lowerInnerQuadColor}
-                                onClick={() => handlePathSelect('lowerInnerQuad')}
+                                fill={lowerInnerQuadColor}
                             />
                         </svg>
                     </div>
@@ -339,9 +275,9 @@ export default function Hero() {
                                     <CardHeader>
                                         <CardTitle>Generate Using Color Palette</CardTitle>
                                         <CardDescription>
-                                        Imagine if you could use the cool colors from the ETH logo 
-                                        to paint anything you want! Future Collect makes it happen!...it&apos;s 
-                                        like they were always meant to be together! Logo ke rang badlo, Logon🤗 ke nahi ...
+                                            Imagine if you could use the cool colors from the ETH logo
+                                            to paint anything you want! Future Collect makes it happen!...it&apos;s
+                                            like they were always meant to be together! Logo ke rang badlo, Logon🤗 ke nahi ...
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
