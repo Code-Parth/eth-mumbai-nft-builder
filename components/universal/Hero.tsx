@@ -442,7 +442,7 @@ export default function Hero() {
                                 </Button>
                             ) : (
                                 <Button variant="secondary">
-                                    <Link href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`}>
+                                    <Link href={`https://github.com/Code-Parth/eth-mumbai-nft-builder`} target="_blank">
                                         <Label className="gap-2 flex font-medium text-md items-center cursor-pointer" style={{ fontFamily: 'Borna' }}>
                                             <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
                                             GitHub Repository
