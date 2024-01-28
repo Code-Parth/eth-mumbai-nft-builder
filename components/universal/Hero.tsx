@@ -17,6 +17,9 @@ export default function Hero() {
     // Using the useToast hook to get the toast object for showing notifications
     const { toast } = useToast()
 
+    // State variable for storing whether the SVG is loading, initially set to false
+    const [loading, setLoading] = useState(false);
+
     // State variable for storing the current date, initially set to null
     const [currentDate, setCurrentDate] = useState<Date | null>(null);
 
@@ -76,6 +79,13 @@ export default function Hero() {
         // If no file was selected, return immediately
         if (!file) return;
 
+        // Set the state variable for loading to true
+        setLoading(true);
+        toast({
+            title: 'Uploading Image...',
+            description: 'Please wait while the image is uploaded.',
+        });
+
         // Create a new FileReader object
         const reader = new FileReader();
 
@@ -98,6 +108,13 @@ export default function Hero() {
                 setCurrentColor(`rgb(${colorPalette[5].join(', ')})`);
                 // Set the state variable for the uploaded image to the result of the file reader
                 setUploadedImage(event.target?.result as string);
+
+                // Set the state variable for loading to false
+                setLoading(false);
+                toast({
+                    title: 'Image Uploaded!',
+                    description: 'The image has been uploaded successfully.',
+                });
             };
 
             // Set the source of the image to the result of the file reader
@@ -211,6 +228,12 @@ export default function Hero() {
 
     // Define a function to generate a Zora mint URL from a PNG
     const generateZoraMintUrlFromPng = () => {
+        setLoading(true);
+        toast({
+            title: 'Redirecting to Zora...',
+            description: 'Please wait while you are redirected to Zora.',
+        });
+
         // Serialize the SVG to a string using XMLSerializer
         const svgData = new XMLSerializer().serializeToString(svgRef.current as Node);
         // Define the URL for uploading to Cloudinary
@@ -262,6 +285,13 @@ export default function Hero() {
 
                     // Create the Zora mint URL
                     const mintUrl = `https://zora.co/create/single-edition?image=${externalImageUrl}&name=${title}&description=${description}`;
+
+                    // Set the state variable for loading to false
+                    setLoading(false);
+                    toast({
+                        title: 'Thank You!',
+                        description: 'You will be redirected to Zora.',
+                    });
 
                     // Open the Zora mint URL in a new tab
                     window.open(mintUrl, '_blank');
