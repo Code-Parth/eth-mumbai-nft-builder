@@ -14,7 +14,6 @@ export default function RootLayout({
             <meta charSet="utf-8" />
             <meta name="description" content="ETH Mumbai NFT Builder | Create and Claim your NFTs" />
             <body>
-                <link rel="icon" href="/favicon.ico" sizes="any" />
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
