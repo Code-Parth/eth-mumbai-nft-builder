@@ -306,6 +306,25 @@ export default function Hero() {
         img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
     };
 
+    // This function is used to share a message on Twitter
+    const shareOnXURI = () => {
+        // This is the text that will be shared. It's encoded to ensure that it can be included in a URL without any issues.
+        const XText = encodeURIComponent(`J̵e̵v̵l̵i̵s̵ ̵K̵a̵?̵ NFT mint kiya kya?
+on eth-mumbai-nft-builder.vercel.app today?
+Built by team Apexia
+@Code_Parth
+@techking_007
+@imsp_18
+@sarthak_bhave
+Let's build for @ethmumbai`);
+
+        // This is the URL for creating a new tweet on Twitter. The text of the tweet is included as a query parameter.
+        const XUrl = `https://twitter.com/intent/tweet?text=${XText}`;
+
+        // This line opens a new tab with the Twitter URL, allowing the user to share the tweet.
+        window.open(XUrl, '_blank');
+    };
+
     return (
         <>
             <div className="w-full max-w-[90%] min-h-[85vh] items-center mx-auto p-5 border-[1px] rounded-lg mb-5">
@@ -403,11 +422,16 @@ export default function Hero() {
                                         </div>
                                     </CardContent>
                                     <CardFooter>
-                                        <Button onClick={generateZoraMintUrlFromPng}>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
-                                            Mint on Zora
-                                        </Button>
+                                        <div className="flex gap-4 flex-row">
+                                            <Button onClick={shareOnXURI} variant="secondary">
+                                                Share on X
+                                            </Button>
+                                            <Button onClick={generateZoraMintUrlFromPng}>
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
+                                                Mint on Zora
+                                            </Button>
+                                        </div>
                                     </CardFooter>
                                 </Card>
                             </TabsContent>
@@ -440,11 +464,16 @@ export default function Hero() {
                                         </div>
                                     </CardContent>
                                     <CardFooter>
-                                        <Button onClick={generateZoraMintUrlFromPng}>
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
-                                            Mint on Zora
-                                        </Button>
+                                        <div className="flex gap-4 flex-row">
+                                            <Button onClick={shareOnXURI} variant="secondary">
+                                                Share on X
+                                            </Button>
+                                            <Button onClick={generateZoraMintUrlFromPng}>
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img className="w-5 mr-4" src="../zorb.webp" alt="Zorb" />
+                                                Mint on Zora
+                                            </Button>
+                                        </div>
                                     </CardFooter>
                                 </Card>
                             </TabsContent>
