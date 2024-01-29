@@ -82,7 +82,7 @@ export default function Hero() {
         // Set the state variable for loading to true
         setLoading(true);
         toast({
-            title: 'Uploading Image...',
+            title: 'कृपया थांबा...',
             description: 'Please wait while the image is uploaded.',
         });
 
@@ -112,7 +112,7 @@ export default function Hero() {
                 // Set the state variable for loading to false
                 setLoading(false);
                 toast({
-                    title: 'Image Uploaded!',
+                    title: 'अभिनंदन !',
                     description: 'The image has been uploaded successfully.',
                 });
             };
@@ -230,7 +230,7 @@ export default function Hero() {
     const generateZoraMintUrlFromPng = () => {
         setLoading(true);
         toast({
-            title: 'Redirecting to Zora...',
+            title: 'कृपया थांबा...',
             description: 'Please wait while you are redirected to Zora.',
         });
 
