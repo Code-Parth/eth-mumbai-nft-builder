@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ETH Mumbai NFT Builder
 
-## Getting Started
+🚀 Welcome to our submission for the "Approving Hackers in PUBLIC: Round 2" challenge by [@ethmumbai](https://twitter.com/ethmumbai)! 🥊
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Explore the interactive customization of the ETHMumbai logo icon through our NFT Builder. Users can change the color combination, download it as PNG or SVG, and even enjoy optional features like extracting color palettes and minting on Zora.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Check out our live demo at [https://eth-mumbai-nft-builder.vercel.app/](https://eth-mumbai-nft-builder.vercel.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+- 🎨 Change color combination of the logo icon
+- 💾 Download customized logo as PNG or SVG
+- 👀 Optional: Get color palette from the image
+- 👀 Optional: Mint on Zora
 
-To learn more about Next.js, take a look at the following resources:
+## How to Use
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Visit [https://eth-mumbai-nft-builder.vercel.app/](https://eth-mumbai-nft-builder.vercel.app/)
+2. Customize the logo using the available options
+3. Download your personalized logo or explore additional features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## GitHub Repository
 
-## Deploy on Vercel
+🔗 [https://github.com/your-username/eth-mumbai-nft-builder](https://github.com/your-username/eth-mumbai-nft-builder)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Feel free to contribute, report issues, or explore the codebase!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Participate in the Challenge
+
+🏆 To participate in the challenge, post your website link & open-source GitHub repo on Twitter, tagging [@ethmumbai](https://twitter.com/ethmumbai) with the hashtag #ETHMumbaiChallenge.
+
+👉 Challenge ends on 30th January, 12 PM IST.
+
+## Acknowledgements
+
+Special thanks to [@ethmumbai](https://twitter.com/ethmumbai) for this amazing opportunity! Let's revolutionize NFT customization together! 💻💡💰
+
+---
+
+Happy hacking! 🚀✨
