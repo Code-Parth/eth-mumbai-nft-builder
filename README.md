@@ -25,7 +25,7 @@ Check out our live demo at [https://eth-mumbai-nft-builder.vercel.app/](https://
 
 ## GitHub Repository
 
-🔗 [https://github.com/your-username/eth-mumbai-nft-builder](https://github.com/your-username/eth-mumbai-nft-builder)
+🔗 [https://github.com/code-parth/eth-mumbai-nft-builder](https://github.com/code-parth/eth-mumbai-nft-builder)
 
 Feel free to contribute, report issues, or explore the codebase!
 
